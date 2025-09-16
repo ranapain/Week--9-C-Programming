@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Ticket {
+    char src[50];
+    char dst[50];
+};
+
+void findItinerary(struct Ticket tickets[], int n) {
+    char start[50];
+    int indeg[100] = {0};
+    char cities[100][50];
+    int cityCount = 0;
+
+    for (int i = 0; i < n; i++) {
+        int foundSrc = 0, foundDst = 0;
+        for (int j = 0; j < n; j++) {
+            if (strcmp(tickets[i].src, tickets[j].dst) == 0) foundDst = 1;
+        }
+        if (!foundDst) strcpy(start, tickets[i].src);
+    }
+
+    char current[50];
+    strcpy(current, start);
+    for (int i = 0; i < n; i++) {
+        printf("%s -> ", current);
+        for (int j = 0; j < n; j++) {
+            if (strcmp(tickets[j].src, current) == 0) {
+                strcpy(current, tickets[j].dst);
+                break;
+            }
+        }
+    }
+    printf("%s", current);
+}
