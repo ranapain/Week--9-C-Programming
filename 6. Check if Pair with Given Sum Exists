@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int cmp(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
+int sumExists(int arr[], int n, int sum) {
+    qsort(arr, n, sizeof(int), cmp);
+    int l = 0, r = n-1;
+    while (l < r) {
+        int s = arr[l] + arr[r];
+        if (s == sum) return 1;
+        else if (s < sum) l++;
+        else r--;
+    }
+    return 0;
+}
