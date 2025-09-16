@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int cmp(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
+int findLongestConseqSubseq(int arr[], int n) {
+    qsort(arr, n, sizeof(int), cmp);
+    int longest = 1, cur_len = 1;
+    for (int i = 1; i < n; i++) {
+        if (arr[i] == arr[i-1] + 1) {
+            cur_len++;
+            if (cur_len > longest) longest = cur_len;
+        } else if (arr[i] != arr[i-1]) {
+            cur_len = 1;
+        }
+    }
+    return longest;
+}
