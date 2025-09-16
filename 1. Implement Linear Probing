@@ -1,0 +1,13 @@
+void linearProbing(int hash[], int hashSize, int arr[], int N) {
+    for (int i = 0; i < N; i++) {
+        int key = arr[i];
+        int index = key % hashSize;
+        int start = index;
+        while (hash[index] != -1 && hash[index] != key) {
+            index = (index + 1) % hashSize;
+            if (index == start) break; // table full
+        }
+        if (hash[index] == -1)
+            hash[index] = key;
+    }
+}
