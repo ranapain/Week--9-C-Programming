@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insert(struct Node* table[], int hashSize, int key) {
+    int index = key % hashSize;
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = key;
+    newNode->next = table[index];
+    table[index] = newNode;
+}
